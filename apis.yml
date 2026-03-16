@@ -1,55 +1,53 @@
+aid: jupyterhub
 name: JupyterHub
-description: Multi-user server for Jupyter notebooks that manages and proxies multiple instances of the single-user Jupyter notebook server
-image: https://jupyter.org/assets/homepage/main-logo.svg
-url: https://jupyter.org/hub
+description: >-
+  JupyterHub is a multi-user server for Jupyter notebooks that manages and
+  proxies multiple instances of the single-user Jupyter notebook server.
+  It provides authentication and spawning for multiple users.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-- jupyter
-- notebooks
-- education
-- data science
-- multi-user
-- python
-created: '2024'
-modified: '2024'
+  - Jupyter
+  - Notebooks
+  - Education
+  - Data Science
+  - Multi-user
+  - Python
+url: https://raw.githubusercontent.com/api-evangelist/jupyterhub/refs/heads/main/apis.yml
+created: '2024-01-01'
+modified: '2026-03-16'
+specificationVersion: '0.19'
 apis:
-- name: JupyterHub REST API
-  description: REST API for managing users, servers, and administrative functions in JupyterHub
-  image: https://jupyter.org/assets/homepage/main-logo.svg
-  humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
-  baseURL: https://your-jupyterhub-domain.com/hub/api
-  tags:
-  - REST API
-  - users
-  - servers
-  - authentication
-  properties:
-  - type: documentation
-    url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
-  - type: openapi
-    url: https://petstore.swagger.io/?url=https://raw.githubusercontent.com/jupyterhub/jupyterhub/main/docs/rest-api.yml
-  - type: authentication
-    url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html#authentication
-  contact:
-  - type: email
-    url: jupyter@googlegroups.com
-  - type: github
-    url: https://github.com/jupyterhub/jupyterhub
-maintainers:
-- name: Project Jupyter
-  email: jupyter@googlegroups.com
-  url: https://jupyter.org
+  - aid: jupyterhub:jupyterhub-rest-api
+    name: JupyterHub REST API
+    description: >-
+      REST API for managing users, servers, and administrative functions
+      in JupyterHub. Authenticated via API tokens.
+    humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+    baseURL: https://your-jupyterhub-domain.com/hub/api
+    tags:
+      - REST API
+      - Users
+      - Servers
+      - Authentication
+    properties:
+      - type: Documentation
+        url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/jupyterhub/jupyterhub/main/docs/rest-api.yml
+      - type: Authentication
+        url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html#authentication
 common:
-- type: github
-  url: https://github.com/jupyterhub/jupyterhub
-- type: documentation
-  url: https://jupyterhub.readthedocs.io/
-- type: getting-started
-  url: https://jupyterhub.readthedocs.io/en/stable/tutorial/quickstart.html
-- type: installation
-  url: https://jupyterhub.readthedocs.io/en/stable/installation-guide.html
-- type: community
-  url: https://discourse.jupyter.org/c/jupyterhub
-- type: slack
-  url: https://jupyter.org/community
-- type: license
-  url: https://github.com/jupyterhub/jupyterhub/blob/main/COPYING.md
+  - type: Website
+    url: https://jupyter.org/hub
+  - type: Documentation
+    url: https://jupyterhub.readthedocs.io/
+  - type: Getting Started
+    url: https://jupyterhub.readthedocs.io/en/stable/tutorial/quickstart.html
+  - type: GitHub Organization
+    url: https://github.com/jupyterhub
+  - type: Community
+    url: https://discourse.jupyter.org/c/jupyterhub
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
