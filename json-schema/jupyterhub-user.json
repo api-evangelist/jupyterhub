@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/jupyterhub/main/json-schema/jupyterhub-user.json",
+  "title": "JupyterHub User",
+  "description": "Schema for a JupyterHub user resource.",
+  "type": "object",
+  "required": ["name"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The user name."
+    },
+    "admin": {
+      "type": "boolean",
+      "description": "Whether the user has admin privileges."
+    },
+    "roles": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Roles assigned to the user."
+    },
+    "groups": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Groups the user belongs to."
+    },
+    "server": {
+      "type": ["string", "null"],
+      "description": "URL of the user's default server, or null if not running."
+    },
+    "pending": {
+      "type": ["string", "null"],
+      "enum": ["spawn", "stop", null],
+      "description": "Pending action on the user's server."
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the user account was created."
+    },
+    "last_activity": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Last activity timestamp for the user."
+    },
+    "servers": {
+      "type": "object",
+      "description": "Mapping of named server names to server objects.",
+      "additionalProperties": {"$ref": "jupyterhub-server.json"}
+    }
+  }
+}

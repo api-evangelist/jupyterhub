@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/jupyterhub/main/json-schema/jupyterhub-group.json",
+  "title": "JupyterHub Group",
+  "description": "Schema for a JupyterHub group resource.",
+  "type": "object",
+  "required": ["name"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The group name."
+    },
+    "users": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "User names that belong to the group."
+    },
+    "roles": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Roles assigned to the group."
+    },
+    "properties": {
+      "type": "object",
+      "description": "Arbitrary group properties."
+    }
+  }
+}

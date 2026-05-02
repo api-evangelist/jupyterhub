@@ -1,0 +1,22 @@
+{
+  "@context": {
+    "@vocab": "https://jupyterhub.readthedocs.io/vocab#",
+    "schema": "https://schema.org/",
+    "JupyterHub": "schema:SoftwareApplication",
+    "User": "schema:Person",
+    "Group": "schema:Group",
+    "Server": "https://jupyterhub.readthedocs.io/vocab#Server",
+    "Service": "https://jupyterhub.readthedocs.io/vocab#Service",
+    "Token": "https://jupyterhub.readthedocs.io/vocab#Token",
+    "name": "schema:name",
+    "admin": "https://jupyterhub.readthedocs.io/vocab#admin",
+    "roles": "https://jupyterhub.readthedocs.io/vocab#roles",
+    "groups": "schema:memberOf",
+    "users": "schema:member",
+    "created": "schema:dateCreated",
+    "lastActivity": "schema:dateModified",
+    "url": "schema:url",
+    "ready": "https://jupyterhub.readthedocs.io/vocab#ready",
+    "pending": "https://jupyterhub.readthedocs.io/vocab#pending"
+  }
+}

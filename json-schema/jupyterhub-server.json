@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/jupyterhub/main/json-schema/jupyterhub-server.json",
+  "title": "JupyterHub Server",
+  "description": "Schema for a JupyterHub single-user server resource.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Server name (empty string for the default server)."
+    },
+    "ready": {
+      "type": "boolean",
+      "description": "Whether the server is ready to handle requests."
+    },
+    "stopped": {
+      "type": "boolean",
+      "description": "Whether the server is stopped."
+    },
+    "pending": {
+      "type": ["string", "null"],
+      "enum": ["spawn", "stop", null],
+      "description": "Pending action on this server."
+    },
+    "url": {
+      "type": "string",
+      "description": "URL where the server is reachable."
+    },
+    "progress_url": {
+      "type": "string",
+      "description": "URL for the server's spawn progress events."
+    },
+    "started": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "When the server was started."
+    },
+    "last_activity": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Last activity timestamp on the server."
+    },
+    "state": {
+      "type": "object",
+      "description": "Spawner-specific state."
+    },
+    "user_options": {
+      "type": "object",
+      "description": "Spawner user options used to start the server."
+    }
+  }
+}
