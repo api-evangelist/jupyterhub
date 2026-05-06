@@ -1,0 +1,1450 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: JupyterHub REST API
+  description: REST API for JupyterHub, the multi-user server for Jupyter notebooks. Provides endpoints for managing users,
+    groups, services, shared servers, OAuth2 authorization, the proxy, and the hub itself. JupyterHub spawns, manages, and
+    proxies multiple instances of the single-user Jupyter notebook server.
+  tags:
+  - Jupyterhub
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: jupyterhub
+    baseUri: http://localhost:8000/hub/api
+    description: JupyterHub REST API HTTP API.
+    authentication:
+      type: apikey
+      in: header
+      name: Authorization
+      value: '{{JUPYTERHUB_TOKEN}}'
+    resources:
+    - name: resource
+      path: /
+      operations:
+      - name: gethubversion
+        method: GET
+        description: JupyterHub Get version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: info
+      path: /info
+      operations:
+      - name: gethubinfo
+        method: GET
+        description: JupyterHub Get detailed info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users
+      path: /users
+      operations:
+      - name: listusers
+        method: GET
+        description: JupyterHub List users
+        inputParameters:
+        - name: state
+          in: query
+          type: string
+        - name: offset
+          in: query
+          type: integer
+        - name: limit
+          in: query
+          type: integer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createusers
+        method: POST
+        description: JupyterHub Create users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users-name
+      path: /users/{name}
+      operations:
+      - name: getuser
+        method: GET
+        description: JupyterHub Get user
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createuser
+        method: POST
+        description: JupyterHub Create user
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateuser
+        method: PATCH
+        description: JupyterHub Update user
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteuser
+        method: DELETE
+        description: JupyterHub Delete user
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users-name-activity
+      path: /users/{name}/activity
+      operations:
+      - name: notifyuseractivity
+        method: POST
+        description: JupyterHub Notify user activity
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users-name-server
+      path: /users/{name}/server
+      operations:
+      - name: startuserserver
+        method: POST
+        description: JupyterHub Start user server
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: stopuserserver
+        method: DELETE
+        description: JupyterHub Stop user server
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users-name-servers-server-name
+      path: /users/{name}/servers/{server_name}
+      operations:
+      - name: startnamedserver
+        method: POST
+        description: JupyterHub Start named server
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: server_name
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: stopnamedserver
+        method: DELETE
+        description: JupyterHub Stop named server
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: server_name
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users-name-tokens
+      path: /users/{name}/tokens
+      operations:
+      - name: listusertokens
+        method: GET
+        description: JupyterHub List user tokens
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createusertoken
+        method: POST
+        description: JupyterHub Create user token
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users-name-tokens-token-id
+      path: /users/{name}/tokens/{token_id}
+      operations:
+      - name: getusertoken
+        method: GET
+        description: JupyterHub Get user token
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: token_id
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: revokeusertoken
+        method: DELETE
+        description: JupyterHub Revoke user token
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: token_id
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: groups
+      path: /groups
+      operations:
+      - name: listgroups
+        method: GET
+        description: JupyterHub List groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: creategroups
+        method: POST
+        description: JupyterHub Create groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: groups-name
+      path: /groups/{name}
+      operations:
+      - name: getgroup
+        method: GET
+        description: JupyterHub Get group
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: creategroup
+        method: POST
+        description: JupyterHub Create group
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletegroup
+        method: DELETE
+        description: JupyterHub Delete group
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: groups-name-users
+      path: /groups/{name}/users
+      operations:
+      - name: addgroupusers
+        method: POST
+        description: JupyterHub Add users to group
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: removegroupusers
+        method: DELETE
+        description: JupyterHub Remove users from group
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: services
+      path: /services
+      operations:
+      - name: listservices
+        method: GET
+        description: JupyterHub List services
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: services-name
+      path: /services/{name}
+      operations:
+      - name: getservice
+        method: GET
+        description: JupyterHub Get service
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: proxy
+      path: /proxy
+      operations:
+      - name: getproxyroutes
+        method: GET
+        description: JupyterHub Get proxy routes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: syncproxy
+        method: POST
+        description: JupyterHub Sync proxy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateproxy
+        method: PATCH
+        description: JupyterHub Update proxy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: authorizations-token
+      path: /authorizations/token
+      operations:
+      - name: requesttoken
+        method: POST
+        description: JupyterHub Request token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: authorizations-token-token
+      path: /authorizations/token/{token}
+      operations:
+      - name: identifytoken
+        method: GET
+        description: JupyterHub Identify token
+        inputParameters:
+        - name: token
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: authorizations-cookie-cookie-name-cookie-value
+      path: /authorizations/cookie/{cookie_name}/{cookie_value}
+      operations:
+      - name: identifycookie
+        method: GET
+        description: JupyterHub Identify cookie
+        inputParameters:
+        - name: cookie_name
+          in: path
+          type: string
+          required: true
+        - name: cookie_value
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: oauth2-authorize
+      path: /oauth2/authorize
+      operations:
+      - name: oauth2authorize
+        method: GET
+        description: JupyterHub OAuth2 authorize
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: oauth2-token
+      path: /oauth2/token
+      operations:
+      - name: oauth2token
+        method: POST
+        description: JupyterHub OAuth2 token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: shutdown
+      path: /shutdown
+      operations:
+      - name: shutdownhub
+        method: POST
+        description: JupyterHub Shutdown
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: jupyterhub-rest
+    description: REST adapter for JupyterHub REST API.
+    resources:
+    - path: /
+      name: gethubversion
+      operations:
+      - method: GET
+        name: gethubversion
+        description: JupyterHub Get version
+        call: jupyterhub.gethubversion
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /info
+      name: gethubinfo
+      operations:
+      - method: GET
+        name: gethubinfo
+        description: JupyterHub Get detailed info
+        call: jupyterhub.gethubinfo
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users
+      name: listusers
+      operations:
+      - method: GET
+        name: listusers
+        description: JupyterHub List users
+        call: jupyterhub.listusers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users
+      name: createusers
+      operations:
+      - method: POST
+        name: createusers
+        description: JupyterHub Create users
+        call: jupyterhub.createusers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users/{name}
+      name: getuser
+      operations:
+      - method: GET
+        name: getuser
+        description: JupyterHub Get user
+        call: jupyterhub.getuser
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users/{name}
+      name: createuser
+      operations:
+      - method: POST
+        name: createuser
+        description: JupyterHub Create user
+        call: jupyterhub.createuser
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users/{name}
+      name: updateuser
+      operations:
+      - method: PATCH
+        name: updateuser
+        description: JupyterHub Update user
+        call: jupyterhub.updateuser
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users/{name}
+      name: deleteuser
+      operations:
+      - method: DELETE
+        name: deleteuser
+        description: JupyterHub Delete user
+        call: jupyterhub.deleteuser
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users/{name}/activity
+      name: notifyuseractivity
+      operations:
+      - method: POST
+        name: notifyuseractivity
+        description: JupyterHub Notify user activity
+        call: jupyterhub.notifyuseractivity
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users/{name}/server
+      name: startuserserver
+      operations:
+      - method: POST
+        name: startuserserver
+        description: JupyterHub Start user server
+        call: jupyterhub.startuserserver
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users/{name}/server
+      name: stopuserserver
+      operations:
+      - method: DELETE
+        name: stopuserserver
+        description: JupyterHub Stop user server
+        call: jupyterhub.stopuserserver
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users/{name}/servers/{server_name}
+      name: startnamedserver
+      operations:
+      - method: POST
+        name: startnamedserver
+        description: JupyterHub Start named server
+        call: jupyterhub.startnamedserver
+        with:
+          name: rest.name
+          server_name: rest.server_name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users/{name}/servers/{server_name}
+      name: stopnamedserver
+      operations:
+      - method: DELETE
+        name: stopnamedserver
+        description: JupyterHub Stop named server
+        call: jupyterhub.stopnamedserver
+        with:
+          name: rest.name
+          server_name: rest.server_name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users/{name}/tokens
+      name: listusertokens
+      operations:
+      - method: GET
+        name: listusertokens
+        description: JupyterHub List user tokens
+        call: jupyterhub.listusertokens
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users/{name}/tokens
+      name: createusertoken
+      operations:
+      - method: POST
+        name: createusertoken
+        description: JupyterHub Create user token
+        call: jupyterhub.createusertoken
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users/{name}/tokens/{token_id}
+      name: getusertoken
+      operations:
+      - method: GET
+        name: getusertoken
+        description: JupyterHub Get user token
+        call: jupyterhub.getusertoken
+        with:
+          name: rest.name
+          token_id: rest.token_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users/{name}/tokens/{token_id}
+      name: revokeusertoken
+      operations:
+      - method: DELETE
+        name: revokeusertoken
+        description: JupyterHub Revoke user token
+        call: jupyterhub.revokeusertoken
+        with:
+          name: rest.name
+          token_id: rest.token_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /groups
+      name: listgroups
+      operations:
+      - method: GET
+        name: listgroups
+        description: JupyterHub List groups
+        call: jupyterhub.listgroups
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /groups
+      name: creategroups
+      operations:
+      - method: POST
+        name: creategroups
+        description: JupyterHub Create groups
+        call: jupyterhub.creategroups
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /groups/{name}
+      name: getgroup
+      operations:
+      - method: GET
+        name: getgroup
+        description: JupyterHub Get group
+        call: jupyterhub.getgroup
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /groups/{name}
+      name: creategroup
+      operations:
+      - method: POST
+        name: creategroup
+        description: JupyterHub Create group
+        call: jupyterhub.creategroup
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /groups/{name}
+      name: deletegroup
+      operations:
+      - method: DELETE
+        name: deletegroup
+        description: JupyterHub Delete group
+        call: jupyterhub.deletegroup
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /groups/{name}/users
+      name: addgroupusers
+      operations:
+      - method: POST
+        name: addgroupusers
+        description: JupyterHub Add users to group
+        call: jupyterhub.addgroupusers
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /groups/{name}/users
+      name: removegroupusers
+      operations:
+      - method: DELETE
+        name: removegroupusers
+        description: JupyterHub Remove users from group
+        call: jupyterhub.removegroupusers
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /services
+      name: listservices
+      operations:
+      - method: GET
+        name: listservices
+        description: JupyterHub List services
+        call: jupyterhub.listservices
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /services/{name}
+      name: getservice
+      operations:
+      - method: GET
+        name: getservice
+        description: JupyterHub Get service
+        call: jupyterhub.getservice
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /proxy
+      name: getproxyroutes
+      operations:
+      - method: GET
+        name: getproxyroutes
+        description: JupyterHub Get proxy routes
+        call: jupyterhub.getproxyroutes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /proxy
+      name: syncproxy
+      operations:
+      - method: POST
+        name: syncproxy
+        description: JupyterHub Sync proxy
+        call: jupyterhub.syncproxy
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /proxy
+      name: updateproxy
+      operations:
+      - method: PATCH
+        name: updateproxy
+        description: JupyterHub Update proxy
+        call: jupyterhub.updateproxy
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /authorizations/token
+      name: requesttoken
+      operations:
+      - method: POST
+        name: requesttoken
+        description: JupyterHub Request token
+        call: jupyterhub.requesttoken
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /authorizations/token/{token}
+      name: identifytoken
+      operations:
+      - method: GET
+        name: identifytoken
+        description: JupyterHub Identify token
+        call: jupyterhub.identifytoken
+        with:
+          token: rest.token
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /authorizations/cookie/{cookie_name}/{cookie_value}
+      name: identifycookie
+      operations:
+      - method: GET
+        name: identifycookie
+        description: JupyterHub Identify cookie
+        call: jupyterhub.identifycookie
+        with:
+          cookie_name: rest.cookie_name
+          cookie_value: rest.cookie_value
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /oauth2/authorize
+      name: oauth2authorize
+      operations:
+      - method: GET
+        name: oauth2authorize
+        description: JupyterHub OAuth2 authorize
+        call: jupyterhub.oauth2authorize
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /oauth2/token
+      name: oauth2token
+      operations:
+      - method: POST
+        name: oauth2token
+        description: JupyterHub OAuth2 token
+        call: jupyterhub.oauth2token
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /shutdown
+      name: shutdownhub
+      operations:
+      - method: POST
+        name: shutdownhub
+        description: JupyterHub Shutdown
+        call: jupyterhub.shutdownhub
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: jupyterhub-mcp
+    transport: http
+    description: MCP adapter for JupyterHub REST API for AI agent use.
+    tools:
+    - name: gethubversion
+      description: JupyterHub Get version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jupyterhub.gethubversion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gethubinfo
+      description: JupyterHub Get detailed info
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jupyterhub.gethubinfo
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listusers
+      description: JupyterHub List users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jupyterhub.listusers
+      with:
+        state: tools.state
+        offset: tools.offset
+        limit: tools.limit
+      inputParameters:
+      - name: state
+        type: string
+        description: state
+      - name: offset
+        type: integer
+        description: offset
+      - name: limit
+        type: integer
+        description: limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createusers
+      description: JupyterHub Create users
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: jupyterhub.createusers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getuser
+      description: JupyterHub Get user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jupyterhub.getuser
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createuser
+      description: JupyterHub Create user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: jupyterhub.createuser
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateuser
+      description: JupyterHub Update user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: jupyterhub.updateuser
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteuser
+      description: JupyterHub Delete user
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: jupyterhub.deleteuser
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: notifyuseractivity
+      description: JupyterHub Notify user activity
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: jupyterhub.notifyuseractivity
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: startuserserver
+      description: JupyterHub Start user server
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: jupyterhub.startuserserver
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: stopuserserver
+      description: JupyterHub Stop user server
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: jupyterhub.stopuserserver
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: startnamedserver
+      description: JupyterHub Start named server
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: jupyterhub.startnamedserver
+      with:
+        name: tools.name
+        server_name: tools.server_name
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      - name: server_name
+        type: string
+        description: server_name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: stopnamedserver
+      description: JupyterHub Stop named server
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: jupyterhub.stopnamedserver
+      with:
+        name: tools.name
+        server_name: tools.server_name
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      - name: server_name
+        type: string
+        description: server_name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listusertokens
+      description: JupyterHub List user tokens
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jupyterhub.listusertokens
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createusertoken
+      description: JupyterHub Create user token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: jupyterhub.createusertoken
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getusertoken
+      description: JupyterHub Get user token
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jupyterhub.getusertoken
+      with:
+        name: tools.name
+        token_id: tools.token_id
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      - name: token_id
+        type: string
+        description: token_id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: revokeusertoken
+      description: JupyterHub Revoke user token
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: jupyterhub.revokeusertoken
+      with:
+        name: tools.name
+        token_id: tools.token_id
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      - name: token_id
+        type: string
+        description: token_id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listgroups
+      description: JupyterHub List groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jupyterhub.listgroups
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: creategroups
+      description: JupyterHub Create groups
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: jupyterhub.creategroups
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getgroup
+      description: JupyterHub Get group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jupyterhub.getgroup
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: creategroup
+      description: JupyterHub Create group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: jupyterhub.creategroup
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletegroup
+      description: JupyterHub Delete group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: jupyterhub.deletegroup
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: addgroupusers
+      description: JupyterHub Add users to group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: jupyterhub.addgroupusers
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: removegroupusers
+      description: JupyterHub Remove users from group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: jupyterhub.removegroupusers
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listservices
+      description: JupyterHub List services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jupyterhub.listservices
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getservice
+      description: JupyterHub Get service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jupyterhub.getservice
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getproxyroutes
+      description: JupyterHub Get proxy routes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jupyterhub.getproxyroutes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: syncproxy
+      description: JupyterHub Sync proxy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: jupyterhub.syncproxy
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateproxy
+      description: JupyterHub Update proxy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: jupyterhub.updateproxy
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: requesttoken
+      description: JupyterHub Request token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: jupyterhub.requesttoken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: identifytoken
+      description: JupyterHub Identify token
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jupyterhub.identifytoken
+      with:
+        token: tools.token
+      inputParameters:
+      - name: token
+        type: string
+        description: token
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: identifycookie
+      description: JupyterHub Identify cookie
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jupyterhub.identifycookie
+      with:
+        cookie_name: tools.cookie_name
+        cookie_value: tools.cookie_value
+      inputParameters:
+      - name: cookie_name
+        type: string
+        description: cookie_name
+        required: true
+      - name: cookie_value
+        type: string
+        description: cookie_value
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oauth2authorize
+      description: JupyterHub OAuth2 authorize
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: jupyterhub.oauth2authorize
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oauth2token
+      description: JupyterHub OAuth2 token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: jupyterhub.oauth2token
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: shutdownhub
+      description: JupyterHub Shutdown
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: jupyterhub.shutdownhub
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    JUPYTERHUB_TOKEN: JUPYTERHUB_TOKEN
