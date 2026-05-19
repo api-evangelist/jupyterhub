@@ -1,0 +1,158 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: JupyterHub REST API — Authorizations
+  description: 'JupyterHub REST API — Authorizations. 3 operations. Lead operation: JupyterHub Identify cookie. Self-contained
+    Naftiko capability covering one Jupyterhub business surface.'
+  tags:
+  - Jupyterhub
+  - Authorizations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    JUPYTERHUB_API_KEY: JUPYTERHUB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-authorizations
+    baseUri: http://localhost:8000/hub/api
+    description: JupyterHub REST API — Authorizations business capability. Self-contained, no shared references.
+    resources:
+    - name: authorizations-cookie-cookie_name-cookie_value
+      path: /authorizations/cookie/{cookie_name}/{cookie_value}
+      operations:
+      - name: identifycookie
+        method: GET
+        description: JupyterHub Identify cookie
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cookie_name
+          in: path
+          type: string
+          required: true
+        - name: cookie_value
+          in: path
+          type: string
+          required: true
+    - name: authorizations-token
+      path: /authorizations/token
+      operations:
+      - name: requesttoken
+        method: POST
+        description: JupyterHub Request token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: authorizations-token-token
+      path: /authorizations/token/{token}
+      operations:
+      - name: identifytoken
+        method: GET
+        description: JupyterHub Identify token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: token
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.JUPYTERHUB_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: rest-authorizations-rest
+    port: 8080
+    description: REST adapter for JupyterHub REST API — Authorizations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/authorizations/cookie/{cookie-name}/{cookie-value}
+      name: authorizations-cookie-cookie-name-cookie-value
+      description: REST surface for authorizations-cookie-cookie_name-cookie_value.
+      operations:
+      - method: GET
+        name: identifycookie
+        description: JupyterHub Identify cookie
+        call: rest-authorizations.identifycookie
+        with:
+          cookie_name: rest.cookie_name
+          cookie_value: rest.cookie_value
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/authorizations/token
+      name: authorizations-token
+      description: REST surface for authorizations-token.
+      operations:
+      - method: POST
+        name: requesttoken
+        description: JupyterHub Request token
+        call: rest-authorizations.requesttoken
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/authorizations/token/{token}
+      name: authorizations-token-token
+      description: REST surface for authorizations-token-token.
+      operations:
+      - method: GET
+        name: identifytoken
+        description: JupyterHub Identify token
+        call: rest-authorizations.identifytoken
+        with:
+          token: rest.token
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-authorizations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for JupyterHub REST API — Authorizations. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: jupyterhub-identify-cookie
+      description: JupyterHub Identify cookie
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-authorizations.identifycookie
+      with:
+        cookie_name: tools.cookie_name
+        cookie_value: tools.cookie_value
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: jupyterhub-request-token
+      description: JupyterHub Request token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-authorizations.requesttoken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: jupyterhub-identify-token
+      description: JupyterHub Identify token
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-authorizations.identifytoken
+      with:
+        token: tools.token
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,200 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: JupyterHub REST API — Servers
+  description: 'JupyterHub REST API — Servers. 4 operations. Lead operation: JupyterHub Start user server. Self-contained
+    Naftiko capability covering one Jupyterhub business surface.'
+  tags:
+  - Jupyterhub
+  - Servers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    JUPYTERHUB_API_KEY: JUPYTERHUB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-servers
+    baseUri: http://localhost:8000/hub/api
+    description: JupyterHub REST API — Servers business capability. Self-contained, no shared references.
+    resources:
+    - name: users-name-server
+      path: /users/{name}/server
+      operations:
+      - name: startuserserver
+        method: POST
+        description: JupyterHub Start user server
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+      - name: stopuserserver
+        method: DELETE
+        description: JupyterHub Stop user server
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+    - name: users-name-servers-server_name
+      path: /users/{name}/servers/{server_name}
+      operations:
+      - name: startnamedserver
+        method: POST
+        description: JupyterHub Start named server
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: server_name
+          in: path
+          type: string
+          required: true
+      - name: stopnamedserver
+        method: DELETE
+        description: JupyterHub Stop named server
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: server_name
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.JUPYTERHUB_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: rest-servers-rest
+    port: 8080
+    description: REST adapter for JupyterHub REST API — Servers. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/users/{name}/server
+      name: users-name-server
+      description: REST surface for users-name-server.
+      operations:
+      - method: POST
+        name: startuserserver
+        description: JupyterHub Start user server
+        call: rest-servers.startuserserver
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: stopuserserver
+        description: JupyterHub Stop user server
+        call: rest-servers.stopuserserver
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{name}/servers/{server-name}
+      name: users-name-servers-server-name
+      description: REST surface for users-name-servers-server_name.
+      operations:
+      - method: POST
+        name: startnamedserver
+        description: JupyterHub Start named server
+        call: rest-servers.startnamedserver
+        with:
+          name: rest.name
+          server_name: rest.server_name
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: stopnamedserver
+        description: JupyterHub Stop named server
+        call: rest-servers.stopnamedserver
+        with:
+          name: rest.name
+          server_name: rest.server_name
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-servers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for JupyterHub REST API — Servers. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: jupyterhub-start-user-server
+      description: JupyterHub Start user server
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-servers.startuserserver
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: jupyterhub-stop-user-server
+      description: JupyterHub Stop user server
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: rest-servers.stopuserserver
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: jupyterhub-start-named-server
+      description: JupyterHub Start named server
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-servers.startnamedserver
+      with:
+        name: tools.name
+        server_name: tools.server_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: jupyterhub-stop-named-server
+      description: JupyterHub Stop named server
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: rest-servers.stopnamedserver
+      with:
+        name: tools.name
+        server_name: tools.server_name
+      outputParameters:
+      - type: object
+        mapping: $.
