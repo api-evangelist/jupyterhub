@@ -5,7 +5,7 @@ description: >-
   instances of the single-user Jupyter notebook server, and exposes a REST API for managing users, groups, services,
   tokens, and the proxy.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Authentication
   - Data Science
