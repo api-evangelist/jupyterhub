@@ -1,0 +1,65 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/jupyterhub-rest-api-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/jupyterhub-rest-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: /hub/api/oauth2/authorize
+    tokenUrl: /hub/api/oauth2/token
+scopes:
+- scope: admin:groups
+  description: Administer groups.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jupyterhub-rest-api-openapi.yml
+- scope: admin:servers
+  description: Administer single-user servers.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jupyterhub-rest-api-openapi.yml
+- scope: admin:users
+  description: Administer users.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jupyterhub-rest-api-openapi.yml
+- scope: list:users
+  description: List users.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jupyterhub-rest-api-openapi.yml
+- scope: proxy
+  description: Manage the proxy.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jupyterhub-rest-api-openapi.yml
+- scope: read:groups
+  description: Read group information.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jupyterhub-rest-api-openapi.yml
+- scope: read:services
+  description: Read service information.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jupyterhub-rest-api-openapi.yml
+- scope: read:users
+  description: Read user information.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jupyterhub-rest-api-openapi.yml
+- scope: self
+  description: Access to the current user.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/jupyterhub-rest-api-openapi.yml

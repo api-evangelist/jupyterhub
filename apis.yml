@@ -53,6 +53,8 @@ apis:
       - type: JSONLDContext
         url: json-ld/jupyterhub-context.jsonld
 common:
+  - type: OAuthScopes
+    url: scopes/jupyterhub-scopes.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/project-jupyter
   - type: Website
@@ -71,6 +73,8 @@ common:
     url: https://discourse.jupyter.org/c/jupyterhub
   - type: License
     url: https://github.com/jupyterhub/jupyterhub/blob/main/COPYING.md
+  - url: https://blog.jupyter.org/feed
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
