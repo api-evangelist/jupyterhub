@@ -53,6 +53,12 @@ apis:
       - type: JSONLDContext
         url: json-ld/jupyterhub-context.jsonld
 common:
+  - type: VulnerabilityDisclosure
+    url: security/jupyterhub-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/jupyterhub-domain-security.yml
+  - type: Authentication
+    url: authentication/jupyterhub-authentication.yml
   - type: OAuthScopes
     url: scopes/jupyterhub-scopes.yml
   - type: LinkedIn
