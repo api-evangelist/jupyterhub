@@ -53,6 +53,8 @@ apis:
       - type: JSONLDContext
         url: json-ld/jupyterhub-context.jsonld
 common:
+  - type: AgenticAccess
+    url: agentic-access/jupyterhub-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/jupyterhub-vulnerability-disclosure.yml
   - type: DomainSecurity
