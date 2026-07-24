@@ -1,0 +1,143 @@
+openapi: 3.1.0
+info:
+  title: JupyterHub REST Activity Groups API
+  description: REST API for JupyterHub, the multi-user server for Jupyter notebooks. Provides endpoints for managing users, groups, services, shared servers, OAuth2 authorization, the proxy, and the hub itself. JupyterHub spawns, manages, and proxies multiple instances of the single-user Jupyter notebook server.
+  version: 5.2.0
+  license:
+    name: BSD-3-Clause
+    url: https://opensource.org/licenses/BSD-3-Clause
+  contact:
+    name: Jupyter Project
+    url: https://jupyterhub.readthedocs.io
+    email: jupyter@googlegroups.com
+servers:
+- url: http://localhost:8000/hub/api
+  description: Local JupyterHub server
+security:
+- token: []
+tags:
+- name: Groups
+  description: User group management.
+paths:
+  /groups:
+    get:
+      operationId: listGroups
+      summary: JupyterHub List groups
+      description: Returns the list of all groups.
+      tags:
+      - Groups
+      responses:
+        '200':
+          description: List of group objects.
+    post:
+      operationId: createGroups
+      summary: JupyterHub Create groups
+      description: Creates one or more groups.
+      tags:
+      - Groups
+      responses:
+        '201':
+          description: Created group objects.
+  /groups/{name}:
+    get:
+      operationId: getGroup
+      summary: JupyterHub Get group
+      description: Returns the named group.
+      tags:
+      - Groups
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Group object.
+    post:
+      operationId: createGroup
+      summary: JupyterHub Create group
+      description: Creates the named group.
+      tags:
+      - Groups
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Group created.
+    delete:
+      operationId: deleteGroup
+      summary: JupyterHub Delete group
+      description: Deletes the named group.
+      tags:
+      - Groups
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Group deleted.
+  /groups/{name}/users:
+    post:
+      operationId: addGroupUsers
+      summary: JupyterHub Add users to group
+      description: Adds users to the named group.
+      tags:
+      - Groups
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Updated group object.
+    delete:
+      operationId: removeGroupUsers
+      summary: JupyterHub Remove users from group
+      description: Removes users from the named group.
+      tags:
+      - Groups
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Updated group object.
+components:
+  securitySchemes:
+    token:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Token-based authentication. Use the form: Authorization: token <token>'
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /hub/api/oauth2/authorize
+          tokenUrl: /hub/api/oauth2/token
+          scopes:
+            self: Access to the current user.
+            admin:users: Administer users.
+            admin:servers: Administer single-user servers.
+            read:users: Read user information.
+            list:users: List users.
+            read:groups: Read group information.
+            admin:groups: Administer groups.
+            read:services: Read service information.
+            proxy: Manage the proxy.
+externalDocs:
+  description: JupyterHub REST API documentation
+  url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html

@@ -1,0 +1,119 @@
+openapi: 3.1.0
+info:
+  title: JupyterHub REST Activity Tokens API
+  description: REST API for JupyterHub, the multi-user server for Jupyter notebooks. Provides endpoints for managing users, groups, services, shared servers, OAuth2 authorization, the proxy, and the hub itself. JupyterHub spawns, manages, and proxies multiple instances of the single-user Jupyter notebook server.
+  version: 5.2.0
+  license:
+    name: BSD-3-Clause
+    url: https://opensource.org/licenses/BSD-3-Clause
+  contact:
+    name: Jupyter Project
+    url: https://jupyterhub.readthedocs.io
+    email: jupyter@googlegroups.com
+servers:
+- url: http://localhost:8000/hub/api
+  description: Local JupyterHub server
+security:
+- token: []
+tags:
+- name: Tokens
+  description: API token management for users.
+paths:
+  /users/{name}/tokens:
+    get:
+      operationId: listUserTokens
+      summary: JupyterHub List user tokens
+      description: Returns the list of API tokens for the named user.
+      tags:
+      - Tokens
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of token objects.
+    post:
+      operationId: createUserToken
+      summary: JupyterHub Create user token
+      description: Creates a new API token for the named user.
+      tags:
+      - Tokens
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Newly created token.
+  /users/{name}/tokens/{token_id}:
+    get:
+      operationId: getUserToken
+      summary: JupyterHub Get user token
+      description: Retrieves the named token for the named user.
+      tags:
+      - Tokens
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: token_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Token object.
+    delete:
+      operationId: revokeUserToken
+      summary: JupyterHub Revoke user token
+      description: Revokes the named token for the named user.
+      tags:
+      - Tokens
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: token_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Token revoked.
+components:
+  securitySchemes:
+    token:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Token-based authentication. Use the form: Authorization: token <token>'
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /hub/api/oauth2/authorize
+          tokenUrl: /hub/api/oauth2/token
+          scopes:
+            self: Access to the current user.
+            admin:users: Administer users.
+            admin:servers: Administer single-user servers.
+            read:users: Read user information.
+            list:users: List users.
+            read:groups: Read group information.
+            admin:groups: Administer groups.
+            read:services: Read service information.
+            proxy: Manage the proxy.
+externalDocs:
+  description: JupyterHub REST API documentation
+  url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html

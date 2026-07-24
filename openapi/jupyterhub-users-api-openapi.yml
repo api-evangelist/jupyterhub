@@ -1,0 +1,144 @@
+openapi: 3.1.0
+info:
+  title: JupyterHub REST Activity Users API
+  description: REST API for JupyterHub, the multi-user server for Jupyter notebooks. Provides endpoints for managing users, groups, services, shared servers, OAuth2 authorization, the proxy, and the hub itself. JupyterHub spawns, manages, and proxies multiple instances of the single-user Jupyter notebook server.
+  version: 5.2.0
+  license:
+    name: BSD-3-Clause
+    url: https://opensource.org/licenses/BSD-3-Clause
+  contact:
+    name: Jupyter Project
+    url: https://jupyterhub.readthedocs.io
+    email: jupyter@googlegroups.com
+servers:
+- url: http://localhost:8000/hub/api
+  description: Local JupyterHub server
+security:
+- token: []
+tags:
+- name: Users
+  description: User account management.
+paths:
+  /users:
+    get:
+      operationId: listUsers
+      summary: JupyterHub List users
+      description: Returns a list of all Hub users. Requires admin permissions or list:users scope.
+      tags:
+      - Users
+      parameters:
+      - name: state
+        in: query
+        schema:
+          type: string
+          enum:
+          - inactive
+          - active
+          - ready
+      - name: offset
+        in: query
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: List of user objects.
+    post:
+      operationId: createUsers
+      summary: JupyterHub Create users
+      description: Creates one or more users.
+      tags:
+      - Users
+      responses:
+        '201':
+          description: Created user objects.
+  /users/{name}:
+    get:
+      operationId: getUser
+      summary: JupyterHub Get user
+      description: Returns the user object for the named user.
+      tags:
+      - Users
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User object.
+    post:
+      operationId: createUser
+      summary: JupyterHub Create user
+      description: Creates the named user.
+      tags:
+      - Users
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: User created.
+    patch:
+      operationId: updateUser
+      summary: JupyterHub Update user
+      description: Updates the named user, for example to rename or grant admin status.
+      tags:
+      - Users
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Updated user object.
+    delete:
+      operationId: deleteUser
+      summary: JupyterHub Delete user
+      description: Deletes the named user.
+      tags:
+      - Users
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: User deleted.
+components:
+  securitySchemes:
+    token:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Token-based authentication. Use the form: Authorization: token <token>'
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /hub/api/oauth2/authorize
+          tokenUrl: /hub/api/oauth2/token
+          scopes:
+            self: Access to the current user.
+            admin:users: Administer users.
+            admin:servers: Administer single-user servers.
+            read:users: Read user information.
+            list:users: List users.
+            read:groups: Read group information.
+            admin:groups: Administer groups.
+            read:services: Read service information.
+            proxy: Manage the proxy.
+externalDocs:
+  description: JupyterHub REST API documentation
+  url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html

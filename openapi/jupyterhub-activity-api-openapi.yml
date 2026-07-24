@@ -1,0 +1,63 @@
+openapi: 3.1.0
+info:
+  title: JupyterHub REST Activity API
+  description: REST API for JupyterHub, the multi-user server for Jupyter notebooks. Provides endpoints for managing users, groups, services, shared servers, OAuth2 authorization, the proxy, and the hub itself. JupyterHub spawns, manages, and proxies multiple instances of the single-user Jupyter notebook server.
+  version: 5.2.0
+  license:
+    name: BSD-3-Clause
+    url: https://opensource.org/licenses/BSD-3-Clause
+  contact:
+    name: Jupyter Project
+    url: https://jupyterhub.readthedocs.io
+    email: jupyter@googlegroups.com
+servers:
+- url: http://localhost:8000/hub/api
+  description: Local JupyterHub server
+security:
+- token: []
+tags:
+- name: Activity
+  description: User activity reporting.
+paths:
+  /users/{name}/activity:
+    post:
+      operationId: notifyUserActivity
+      summary: JupyterHub Notify user activity
+      description: Notifies the Hub of activity for the named user. Used by single-user servers to extend their lifetime.
+      tags:
+      - Activity
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Activity recorded.
+components:
+  securitySchemes:
+    token:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Token-based authentication. Use the form: Authorization: token <token>'
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /hub/api/oauth2/authorize
+          tokenUrl: /hub/api/oauth2/token
+          scopes:
+            self: Access to the current user.
+            admin:users: Administer users.
+            admin:servers: Administer single-user servers.
+            read:users: Read user information.
+            list:users: List users.
+            read:groups: Read group information.
+            admin:groups: Administer groups.
+            read:services: Read service information.
+            proxy: Manage the proxy.
+externalDocs:
+  description: JupyterHub REST API documentation
+  url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
