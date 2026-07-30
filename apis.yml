@@ -5,7 +5,20 @@ description: >-
   instances of the single-user Jupyter notebook server, and exposes a REST API for managing users, groups, services,
   tokens, and the proxy.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/jupyterhub.png
 tags:
   - Authentication
   - Data Science
@@ -20,38 +33,270 @@ created: '2024-01-01'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: jupyterhub:jupyterhub-rest-api
-    name: JupyterHub REST API
-    description: >-
-      REST API for managing users, groups, single-user servers, services, tokens, the proxy, and OAuth2 authorization in
-      a JupyterHub deployment. Authenticated via API tokens or OAuth2.
-    humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
-    baseURL: http://localhost:8000/hub/api
-    tags:
-      - Authentication
-      - Groups
-      - OAuth2
-      - REST API
-      - Servers
-      - Tokens
-      - Users
-    properties:
-      - type: Documentation
-        url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
-      - type: Repository
-        url: https://github.com/jupyterhub/jupyterhub
-      - type: Authentication
-        url: https://jupyterhub.readthedocs.io/en/stable/rbac/index.html
-      - type: OpenAPI
-        url: openapi/jupyterhub-rest-api-openapi.yml
-      - type: JSONSchema
-        url: json-schema/jupyterhub-user.json
-      - type: JSONSchema
-        url: json-schema/jupyterhub-server.json
-      - type: JSONSchema
-        url: json-schema/jupyterhub-group.json
-      - type: JSONLDContext
-        url: json-ld/jupyterhub-context.jsonld
+- aid: jupyterhub:jupyterhub-activity-api
+  name: JupyterHub Activity API
+  description: User activity reporting.
+  humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  baseURL: http://localhost:8000/hub/api
+  tags:
+  - Activity
+  properties:
+  - type: OpenAPI
+    url: openapi/jupyterhub-activity-api-openapi.yml
+  - type: Documentation
+    url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  - type: Repository
+    url: https://github.com/jupyterhub/jupyterhub
+  - type: Authentication
+    url: https://jupyterhub.readthedocs.io/en/stable/rbac/index.html
+  - type: JSONSchema
+    url: json-schema/jupyterhub-user.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-server.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-group.json
+  - type: JSONLDContext
+    url: json-ld/jupyterhub-context.jsonld
+- aid: jupyterhub:jupyterhub-admin-api
+  name: JupyterHub Admin API
+  description: Administrative operations.
+  humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  baseURL: http://localhost:8000/hub/api
+  tags:
+  - Admin
+  properties:
+  - type: OpenAPI
+    url: openapi/jupyterhub-admin-api-openapi.yml
+  - type: Documentation
+    url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  - type: Repository
+    url: https://github.com/jupyterhub/jupyterhub
+  - type: Authentication
+    url: https://jupyterhub.readthedocs.io/en/stable/rbac/index.html
+  - type: JSONSchema
+    url: json-schema/jupyterhub-user.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-server.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-group.json
+  - type: JSONLDContext
+    url: json-ld/jupyterhub-context.jsonld
+- aid: jupyterhub:jupyterhub-authorizations-api
+  name: JupyterHub Authorizations API
+  description: Token and cookie verification.
+  humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  baseURL: http://localhost:8000/hub/api
+  tags:
+  - Authorizations
+  properties:
+  - type: OpenAPI
+    url: openapi/jupyterhub-authorizations-api-openapi.yml
+  - type: Documentation
+    url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  - type: Repository
+    url: https://github.com/jupyterhub/jupyterhub
+  - type: Authentication
+    url: https://jupyterhub.readthedocs.io/en/stable/rbac/index.html
+  - type: JSONSchema
+    url: json-schema/jupyterhub-user.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-server.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-group.json
+  - type: JSONLDContext
+    url: json-ld/jupyterhub-context.jsonld
+- aid: jupyterhub:jupyterhub-general-api
+  name: JupyterHub General API
+  description: Hub identity and information.
+  humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  baseURL: http://localhost:8000/hub/api
+  tags:
+  - General
+  properties:
+  - type: OpenAPI
+    url: openapi/jupyterhub-general-api-openapi.yml
+  - type: Documentation
+    url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  - type: Repository
+    url: https://github.com/jupyterhub/jupyterhub
+  - type: Authentication
+    url: https://jupyterhub.readthedocs.io/en/stable/rbac/index.html
+  - type: JSONSchema
+    url: json-schema/jupyterhub-user.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-server.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-group.json
+  - type: JSONLDContext
+    url: json-ld/jupyterhub-context.jsonld
+- aid: jupyterhub:jupyterhub-groups-api
+  name: JupyterHub Groups API
+  description: User group management.
+  humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  baseURL: http://localhost:8000/hub/api
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/jupyterhub-groups-api-openapi.yml
+  - type: Documentation
+    url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  - type: Repository
+    url: https://github.com/jupyterhub/jupyterhub
+  - type: Authentication
+    url: https://jupyterhub.readthedocs.io/en/stable/rbac/index.html
+  - type: JSONSchema
+    url: json-schema/jupyterhub-user.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-server.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-group.json
+  - type: JSONLDContext
+    url: json-ld/jupyterhub-context.jsonld
+- aid: jupyterhub:jupyterhub-oauth2-api
+  name: JupyterHub OAuth2 API
+  description: OAuth2 authorization endpoints.
+  humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  baseURL: http://localhost:8000/hub/api
+  tags:
+  - OAuth2
+  properties:
+  - type: OpenAPI
+    url: openapi/jupyterhub-oauth2-api-openapi.yml
+  - type: Documentation
+    url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  - type: Repository
+    url: https://github.com/jupyterhub/jupyterhub
+  - type: Authentication
+    url: https://jupyterhub.readthedocs.io/en/stable/rbac/index.html
+  - type: JSONSchema
+    url: json-schema/jupyterhub-user.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-server.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-group.json
+  - type: JSONLDContext
+    url: json-ld/jupyterhub-context.jsonld
+- aid: jupyterhub:jupyterhub-proxy-api
+  name: JupyterHub Proxy API
+  description: Configurable HTTP proxy management.
+  humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  baseURL: http://localhost:8000/hub/api
+  tags:
+  - Proxy
+  properties:
+  - type: OpenAPI
+    url: openapi/jupyterhub-proxy-api-openapi.yml
+  - type: Documentation
+    url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  - type: Repository
+    url: https://github.com/jupyterhub/jupyterhub
+  - type: Authentication
+    url: https://jupyterhub.readthedocs.io/en/stable/rbac/index.html
+  - type: JSONSchema
+    url: json-schema/jupyterhub-user.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-server.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-group.json
+  - type: JSONLDContext
+    url: json-ld/jupyterhub-context.jsonld
+- aid: jupyterhub:jupyterhub-servers-api
+  name: JupyterHub Servers API
+  description: Single-user server lifecycle.
+  humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  baseURL: http://localhost:8000/hub/api
+  tags:
+  - Servers
+  properties:
+  - type: OpenAPI
+    url: openapi/jupyterhub-servers-api-openapi.yml
+  - type: Documentation
+    url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  - type: Repository
+    url: https://github.com/jupyterhub/jupyterhub
+  - type: Authentication
+    url: https://jupyterhub.readthedocs.io/en/stable/rbac/index.html
+  - type: JSONSchema
+    url: json-schema/jupyterhub-user.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-server.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-group.json
+  - type: JSONLDContext
+    url: json-ld/jupyterhub-context.jsonld
+- aid: jupyterhub:jupyterhub-services-api
+  name: JupyterHub Services API
+  description: Hub-managed services.
+  humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  baseURL: http://localhost:8000/hub/api
+  tags:
+  - Services
+  properties:
+  - type: OpenAPI
+    url: openapi/jupyterhub-services-api-openapi.yml
+  - type: Documentation
+    url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  - type: Repository
+    url: https://github.com/jupyterhub/jupyterhub
+  - type: Authentication
+    url: https://jupyterhub.readthedocs.io/en/stable/rbac/index.html
+  - type: JSONSchema
+    url: json-schema/jupyterhub-user.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-server.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-group.json
+  - type: JSONLDContext
+    url: json-ld/jupyterhub-context.jsonld
+- aid: jupyterhub:jupyterhub-tokens-api
+  name: JupyterHub Tokens API
+  description: API token management for users.
+  humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  baseURL: http://localhost:8000/hub/api
+  tags:
+  - Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/jupyterhub-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  - type: Repository
+    url: https://github.com/jupyterhub/jupyterhub
+  - type: Authentication
+    url: https://jupyterhub.readthedocs.io/en/stable/rbac/index.html
+  - type: JSONSchema
+    url: json-schema/jupyterhub-user.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-server.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-group.json
+  - type: JSONLDContext
+    url: json-ld/jupyterhub-context.jsonld
+- aid: jupyterhub:jupyterhub-users-api
+  name: JupyterHub Users API
+  description: User account management.
+  humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  baseURL: http://localhost:8000/hub/api
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/jupyterhub-users-api-openapi.yml
+  - type: Documentation
+    url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  - type: Repository
+    url: https://github.com/jupyterhub/jupyterhub
+  - type: Authentication
+    url: https://jupyterhub.readthedocs.io/en/stable/rbac/index.html
+  - type: JSONSchema
+    url: json-schema/jupyterhub-user.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-server.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-group.json
+  - type: JSONLDContext
+    url: json-ld/jupyterhub-context.jsonld
 common:
   - type: AgenticAccess
     url: agentic-access/jupyterhub-agentic-access.yml
