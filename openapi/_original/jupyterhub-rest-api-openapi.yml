@@ -1,0 +1,594 @@
+openapi: 3.1.0
+info:
+  title: JupyterHub REST API
+  description: >-
+    REST API for JupyterHub, the multi-user server for Jupyter notebooks.
+    Provides endpoints for managing users, groups, services, shared servers,
+    OAuth2 authorization, the proxy, and the hub itself. JupyterHub spawns,
+    manages, and proxies multiple instances of the single-user Jupyter
+    notebook server.
+  version: 5.2.0
+  license:
+    name: BSD-3-Clause
+    url: https://opensource.org/licenses/BSD-3-Clause
+  contact:
+    name: Jupyter Project
+    url: https://jupyterhub.readthedocs.io
+    email: jupyter@googlegroups.com
+servers:
+  - url: http://localhost:8000/hub/api
+    description: Local JupyterHub server
+externalDocs:
+  description: JupyterHub REST API documentation
+  url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+tags:
+  - name: General
+    description: Hub identity and information.
+  - name: Users
+    description: User account management.
+  - name: Tokens
+    description: API token management for users.
+  - name: Servers
+    description: Single-user server lifecycle.
+  - name: Activity
+    description: User activity reporting.
+  - name: Groups
+    description: User group management.
+  - name: Shared
+    description: Shared server access.
+  - name: Services
+    description: Hub-managed services.
+  - name: Proxy
+    description: Configurable HTTP proxy management.
+  - name: OAuth2
+    description: OAuth2 authorization endpoints.
+  - name: Authorizations
+    description: Token and cookie verification.
+  - name: Admin
+    description: Administrative operations.
+paths:
+  /:
+    get:
+      operationId: getHubVersion
+      summary: JupyterHub Get version
+      description: Returns the version of the running JupyterHub instance. Does not require authentication.
+      tags:
+        - General
+      security: []
+      responses:
+        '200':
+          description: JupyterHub version information.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+  /info:
+    get:
+      operationId: getHubInfo
+      summary: JupyterHub Get detailed info
+      description: Returns detailed information about the running Hub, including authenticator and spawner classes.
+      tags:
+        - General
+      responses:
+        '200':
+          description: Detailed Hub information.
+  /users:
+    get:
+      operationId: listUsers
+      summary: JupyterHub List users
+      description: Returns a list of all Hub users. Requires admin permissions or list:users scope.
+      tags:
+        - Users
+      parameters:
+        - name: state
+          in: query
+          schema:
+            type: string
+            enum: [inactive, active, ready]
+        - name: offset
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of user objects.
+    post:
+      operationId: createUsers
+      summary: JupyterHub Create users
+      description: Creates one or more users.
+      tags:
+        - Users
+      responses:
+        '201':
+          description: Created user objects.
+  /users/{name}:
+    get:
+      operationId: getUser
+      summary: JupyterHub Get user
+      description: Returns the user object for the named user.
+      tags:
+        - Users
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User object.
+    post:
+      operationId: createUser
+      summary: JupyterHub Create user
+      description: Creates the named user.
+      tags:
+        - Users
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: User created.
+    patch:
+      operationId: updateUser
+      summary: JupyterHub Update user
+      description: Updates the named user, for example to rename or grant admin status.
+      tags:
+        - Users
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Updated user object.
+    delete:
+      operationId: deleteUser
+      summary: JupyterHub Delete user
+      description: Deletes the named user.
+      tags:
+        - Users
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: User deleted.
+  /users/{name}/activity:
+    post:
+      operationId: notifyUserActivity
+      summary: JupyterHub Notify user activity
+      description: Notifies the Hub of activity for the named user. Used by single-user servers to extend their lifetime.
+      tags:
+        - Activity
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Activity recorded.
+  /users/{name}/server:
+    post:
+      operationId: startUserServer
+      summary: JupyterHub Start user server
+      description: Starts the default single-user server for the named user.
+      tags:
+        - Servers
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Server starting (synchronous).
+        '202':
+          description: Server starting (asynchronous).
+    delete:
+      operationId: stopUserServer
+      summary: JupyterHub Stop user server
+      description: Stops the default single-user server for the named user.
+      tags:
+        - Servers
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Server stopped.
+        '202':
+          description: Server stopping (asynchronous).
+  /users/{name}/servers/{server_name}:
+    post:
+      operationId: startNamedServer
+      summary: JupyterHub Start named server
+      description: Starts a named single-user server for the named user.
+      tags:
+        - Servers
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: server_name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Named server starting.
+        '202':
+          description: Named server starting (asynchronous).
+    delete:
+      operationId: stopNamedServer
+      summary: JupyterHub Stop named server
+      description: Stops the named single-user server for the named user.
+      tags:
+        - Servers
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: server_name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Named server stopped.
+        '202':
+          description: Named server stopping (asynchronous).
+  /users/{name}/tokens:
+    get:
+      operationId: listUserTokens
+      summary: JupyterHub List user tokens
+      description: Returns the list of API tokens for the named user.
+      tags:
+        - Tokens
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of token objects.
+    post:
+      operationId: createUserToken
+      summary: JupyterHub Create user token
+      description: Creates a new API token for the named user.
+      tags:
+        - Tokens
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Newly created token.
+  /users/{name}/tokens/{token_id}:
+    get:
+      operationId: getUserToken
+      summary: JupyterHub Get user token
+      description: Retrieves the named token for the named user.
+      tags:
+        - Tokens
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: token_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Token object.
+    delete:
+      operationId: revokeUserToken
+      summary: JupyterHub Revoke user token
+      description: Revokes the named token for the named user.
+      tags:
+        - Tokens
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: token_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Token revoked.
+  /groups:
+    get:
+      operationId: listGroups
+      summary: JupyterHub List groups
+      description: Returns the list of all groups.
+      tags:
+        - Groups
+      responses:
+        '200':
+          description: List of group objects.
+    post:
+      operationId: createGroups
+      summary: JupyterHub Create groups
+      description: Creates one or more groups.
+      tags:
+        - Groups
+      responses:
+        '201':
+          description: Created group objects.
+  /groups/{name}:
+    get:
+      operationId: getGroup
+      summary: JupyterHub Get group
+      description: Returns the named group.
+      tags:
+        - Groups
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Group object.
+    post:
+      operationId: createGroup
+      summary: JupyterHub Create group
+      description: Creates the named group.
+      tags:
+        - Groups
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Group created.
+    delete:
+      operationId: deleteGroup
+      summary: JupyterHub Delete group
+      description: Deletes the named group.
+      tags:
+        - Groups
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Group deleted.
+  /groups/{name}/users:
+    post:
+      operationId: addGroupUsers
+      summary: JupyterHub Add users to group
+      description: Adds users to the named group.
+      tags:
+        - Groups
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Updated group object.
+    delete:
+      operationId: removeGroupUsers
+      summary: JupyterHub Remove users from group
+      description: Removes users from the named group.
+      tags:
+        - Groups
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Updated group object.
+  /services:
+    get:
+      operationId: listServices
+      summary: JupyterHub List services
+      description: Returns the list of registered Hub services.
+      tags:
+        - Services
+      responses:
+        '200':
+          description: List of service objects.
+  /services/{name}:
+    get:
+      operationId: getService
+      summary: JupyterHub Get service
+      description: Returns the named service.
+      tags:
+        - Services
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Service object.
+  /proxy:
+    get:
+      operationId: getProxyRoutes
+      summary: JupyterHub Get proxy routes
+      description: Returns the current proxy routing table.
+      tags:
+        - Proxy
+      responses:
+        '200':
+          description: Proxy routing table.
+    post:
+      operationId: syncProxy
+      summary: JupyterHub Sync proxy
+      description: Forces the Hub to sync its proxy routing table.
+      tags:
+        - Proxy
+      responses:
+        '200':
+          description: Proxy synchronized.
+    patch:
+      operationId: updateProxy
+      summary: JupyterHub Update proxy
+      description: Updates the proxy with new authentication or URL.
+      tags:
+        - Proxy
+      responses:
+        '200':
+          description: Proxy updated.
+  /authorizations/token:
+    post:
+      operationId: requestToken
+      summary: JupyterHub Request token
+      description: Requests a new token, given a username and password.
+      tags:
+        - Authorizations
+      security: []
+      responses:
+        '200':
+          description: Newly issued token.
+  /authorizations/token/{token}:
+    get:
+      operationId: identifyToken
+      summary: JupyterHub Identify token
+      description: Identifies the user or service that owns the given token.
+      tags:
+        - Authorizations
+      parameters:
+        - name: token
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Identity for the token.
+  /authorizations/cookie/{cookie_name}/{cookie_value}:
+    get:
+      operationId: identifyCookie
+      summary: JupyterHub Identify cookie
+      description: Identifies the user that owns a given cookie.
+      tags:
+        - Authorizations
+      parameters:
+        - name: cookie_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: cookie_value
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Identity for the cookie.
+  /oauth2/authorize:
+    get:
+      operationId: oauth2Authorize
+      summary: JupyterHub OAuth2 authorize
+      description: OAuth2 authorization endpoint. Initiates the OAuth2 authorization code flow.
+      tags:
+        - OAuth2
+      security: []
+      responses:
+        '302':
+          description: Redirect to client redirect URI with authorization code.
+  /oauth2/token:
+    post:
+      operationId: oauth2Token
+      summary: JupyterHub OAuth2 token
+      description: OAuth2 token endpoint. Exchanges an authorization code for an access token.
+      tags:
+        - OAuth2
+      security: []
+      responses:
+        '200':
+          description: OAuth2 token response.
+  /shutdown:
+    post:
+      operationId: shutdownHub
+      summary: JupyterHub Shutdown
+      description: Shuts down the Hub.
+      tags:
+        - Admin
+      responses:
+        '200':
+          description: Hub shutting down.
+components:
+  securitySchemes:
+    token:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Token-based authentication. Use the form: Authorization: token <token>'
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /hub/api/oauth2/authorize
+          tokenUrl: /hub/api/oauth2/token
+          scopes:
+            'self': Access to the current user.
+            'admin:users': Administer users.
+            'admin:servers': Administer single-user servers.
+            'read:users': Read user information.
+            'list:users': List users.
+            'read:groups': Read group information.
+            'admin:groups': Administer groups.
+            'read:services': Read service information.
+            'proxy': Manage the proxy.
+security:
+  - token: []

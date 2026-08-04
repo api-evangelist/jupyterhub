@@ -1,0 +1,34 @@
+{
+  "provider": "jupyterhub",
+  "sources": [
+    "jupyterhub-activity-api-openapi.yml",
+    "jupyterhub-admin-api-openapi.yml",
+    "jupyterhub-authorizations-api-openapi.yml",
+    "jupyterhub-general-api-openapi.yml",
+    "jupyterhub-groups-api-openapi.yml",
+    "jupyterhub-oauth2-api-openapi.yml",
+    "jupyterhub-proxy-api-openapi.yml",
+    "jupyterhub-servers-api-openapi.yml",
+    "jupyterhub-services-api-openapi.yml",
+    "jupyterhub-tokens-api-openapi.yml",
+    "jupyterhub-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "jupyterhub-activity-api-openapi.yml",
+    "jupyterhub-admin-api-openapi.yml",
+    "jupyterhub-authorizations-api-openapi.yml",
+    "jupyterhub-general-api-openapi.yml",
+    "jupyterhub-groups-api-openapi.yml",
+    "jupyterhub-oauth2-api-openapi.yml",
+    "jupyterhub-proxy-api-openapi.yml",
+    "jupyterhub-servers-api-openapi.yml",
+    "jupyterhub-services-api-openapi.yml",
+    "jupyterhub-tokens-api-openapi.yml",
+    "jupyterhub-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
