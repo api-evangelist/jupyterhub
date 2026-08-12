@@ -298,6 +298,14 @@ apis:
   - type: JSONLDContext
     url: json-ld/jupyterhub-context.jsonld
 common:
+  - type: IssueTracker
+    url: https://github.com/jupyterhub/jupyterhub/issues
+  - type: SecurityPolicy
+    url: https://github.com/jupyterhub/jupyterhub/blob/main/SECURITY.md
+  - type: CodeOfConduct
+    url: https://github.com/jupyterhub/jupyterhub/blob/main/CODE_OF_CONDUCT.md
+  - type: ContributionGuide
+    url: https://github.com/jupyterhub/jupyterhub/blob/main/CONTRIBUTING.md
   - type: AgenticAccess
     url: agentic-access/jupyterhub-agentic-access.yml
   - type: VulnerabilityDisclosure
