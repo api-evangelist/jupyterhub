@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JupyterHub REST Activity Authorizations API",
+    "version": "5.2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authorizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "JupyterHub Request token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8000/hub/api/authorizations/token"
+          },
+          "docs": "Requests a new token, given a username and password."
+        },
+        {
+          "info": {
+            "name": "JupyterHub Identify token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8000/hub/api/authorizations/token/:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Identifies the user or service that owns the given token."
+        },
+        {
+          "info": {
+            "name": "JupyterHub Identify cookie",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8000/hub/api/authorizations/cookie/:cookie_name/:cookie_value",
+            "params": [
+              {
+                "name": "cookie_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cookie_value",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Identifies the user that owns a given cookie."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

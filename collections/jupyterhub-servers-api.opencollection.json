@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JupyterHub REST Activity Servers API",
+    "version": "5.2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Servers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "JupyterHub Start user server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8000/hub/api/users/:name/server",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Starts the default single-user server for the named user."
+        },
+        {
+          "info": {
+            "name": "JupyterHub Stop user server",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8000/hub/api/users/:name/server",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stops the default single-user server for the named user."
+        },
+        {
+          "info": {
+            "name": "JupyterHub Start named server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8000/hub/api/users/:name/servers/:server_name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "server_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Starts a named single-user server for the named user."
+        },
+        {
+          "info": {
+            "name": "JupyterHub Stop named server",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8000/hub/api/users/:name/servers/:server_name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "server_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stops the named single-user server for the named user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JupyterHub REST Activity Proxy API",
+    "version": "5.2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Proxy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "JupyterHub Get proxy routes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8000/hub/api/proxy"
+          },
+          "docs": "Returns the current proxy routing table."
+        },
+        {
+          "info": {
+            "name": "JupyterHub Sync proxy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8000/hub/api/proxy"
+          },
+          "docs": "Forces the Hub to sync its proxy routing table."
+        },
+        {
+          "info": {
+            "name": "JupyterHub Update proxy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://localhost:8000/hub/api/proxy"
+          },
+          "docs": "Updates the proxy with new authentication or URL."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

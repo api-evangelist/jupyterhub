@@ -1,0 +1,253 @@
+{
+  "item": [
+    {
+      "id": "0242abfa-d612-4835-abb4-d90d4cda731d",
+      "name": "Proxy",
+      "description": {
+        "content": "Configurable HTTP proxy management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a3fb6be6-062a-4355-98d7-9f13470e3140",
+          "name": "JupyterHub Get proxy routes",
+          "request": {
+            "name": "JupyterHub Get proxy routes",
+            "description": {
+              "content": "Returns the current proxy routing table.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "proxy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc66c864-99d5-4175-af96-0db0a118eab5",
+              "name": "Proxy routing table.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3e6b2fe-fca5-4152-9a71-92c9d80201ed",
+          "name": "JupyterHub Sync proxy",
+          "request": {
+            "name": "JupyterHub Sync proxy",
+            "description": {
+              "content": "Forces the Hub to sync its proxy routing table.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "proxy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "669bfe77-6058-4216-a138-b8e23590b812",
+              "name": "Proxy synchronized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b88962a1-5abe-412f-93b4-3f06c10b0690",
+          "name": "JupyterHub Update proxy",
+          "request": {
+            "name": "JupyterHub Update proxy",
+            "description": {
+              "content": "Updates the proxy with new authentication or URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "proxy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d750302b-b618-4680-8b3a-e9aa580ff9ed",
+              "name": "Proxy updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "proxy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8000/hub/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4987baa1-4f4f-4185-8744-f4715ad740d5",
+    "name": "JupyterHub REST Activity Proxy API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for JupyterHub, the multi-user server for Jupyter notebooks. Provides endpoints for managing users, groups, services, shared servers, OAuth2 authorization, the proxy, and the hub itself. JupyterHub spawns, manages, and proxies multiple instances of the single-user Jupyter notebook server.\n\nContact Support:\n Name: Jupyter Project\n Email: jupyter@googlegroups.com",
+      "type": "text/plain"
+    }
+  }
+}

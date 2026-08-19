@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JupyterHub REST Activity OAuth2 API",
+    "version": "5.2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OAuth2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "JupyterHub OAuth2 authorize",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8000/hub/api/oauth2/authorize"
+          },
+          "docs": "OAuth2 authorization endpoint. Initiates the OAuth2 authorization code flow."
+        },
+        {
+          "info": {
+            "name": "JupyterHub OAuth2 token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8000/hub/api/oauth2/token"
+          },
+          "docs": "OAuth2 token endpoint. Exchanges an authorization code for an access token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
