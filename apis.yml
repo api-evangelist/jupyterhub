@@ -26,6 +26,14 @@ tags:
   - Hub
   - Multi-User
   - Notebooks
+  - Python
+tags_raw:
+  - Authentication
+  - Data Science
+  - Education
+  - Hub
+  - Multi-User
+  - Notebooks
   - OAuth2
   - Python
 url: https://raw.githubusercontent.com/api-evangelist/jupyterhub/refs/heads/main/apis.yml
@@ -110,7 +118,8 @@ apis:
   description: Hub identity and information.
   humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
   baseURL: http://localhost:8000/hub/api
-  tags:
+  tags: []
+  tags_raw:
   - General
   properties:
   - type: OpenAPI
@@ -135,6 +144,8 @@ apis:
   humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
   baseURL: http://localhost:8000/hub/api
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -159,6 +170,8 @@ apis:
   humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
   baseURL: http://localhost:8000/hub/api
   tags:
+  - Authentication
+  tags_raw:
   - OAuth2
   properties:
   - type: OpenAPI
@@ -279,6 +292,8 @@ apis:
   humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
   baseURL: http://localhost:8000/hub/api
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
