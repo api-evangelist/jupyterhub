@@ -1,0 +1,46 @@
+slug: jupyterhub
+provider: JupyterHub
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Education
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: OAuth2
+  spec_file: jupyterhub-oauth2-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: GET /oauth2/authorize  oauth2Authorize; POST /oauth2/token  oauth2Token
+  reason: Standard OAuth2 authorisation-code and token endpoints — authentication/authorisation flows.
+    Cleanly Identity & Access Management; no other reading fits.
+- tag: Authorizations
+  spec_file: jupyterhub-authorizations-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.78
+  evidence: POST /authorizations/token  requestToken; GET /authorizations/token/{token}  identifyToken;
+    GET /authorizations/cookie/{cookie_name}/{cookie_value}  identifyCookie
+  reason: Operations issue API tokens and resolve tokens/cookies to authenticated identities — authentication
+    and access-credential management. Maps to Identity & Access Management as generic IT security capability,
+    not to anything education-specific.
+- tag: Groups
+  spec_file: jupyterhub-groups-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /groups/{name}/users  addGroupUsers  JupyterHub Add users to group; DELETE /groups/{name}/users  removeGroupUsers
+  reason: Group creation and user-to-group membership assignment in the hub is authorisation grouping
+    for access control, i.e. Identity & Access Management. Note it is NOT student cohort/class management
+    despite the education-adjacent buyer base — the spec frames groups as hub user collections used for
+    permissions.
