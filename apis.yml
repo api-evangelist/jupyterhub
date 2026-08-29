@@ -5,6 +5,18 @@ description: >-
   instances of the single-user Jupyter notebook server, and exposes a REST API for managing users, groups, services,
   tokens, and the proxy.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
