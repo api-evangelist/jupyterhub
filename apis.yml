@@ -178,32 +178,6 @@ apis:
     url: json-schema/jupyterhub-group.json
   - type: JSONLDContext
     url: json-ld/jupyterhub-context.jsonld
-- aid: jupyterhub:jupyterhub-oauth2-api
-  name: JupyterHub OAuth2 API
-  description: OAuth2 authorization endpoints.
-  humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
-  baseURL: http://localhost:8000/hub/api
-  tags:
-  - Authentication
-  tags_raw:
-  - OAuth2
-  properties:
-  - type: OpenAPI
-    url: openapi/jupyterhub-oauth2-api-openapi.yml
-  - type: Documentation
-    url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
-  - type: Repository
-    url: https://github.com/jupyterhub/jupyterhub
-  - type: Authentication
-    url: https://jupyterhub.readthedocs.io/en/stable/rbac/index.html
-  - type: JSONSchema
-    url: json-schema/jupyterhub-user.json
-  - type: JSONSchema
-    url: json-schema/jupyterhub-server.json
-  - type: JSONSchema
-    url: json-schema/jupyterhub-group.json
-  - type: JSONLDContext
-    url: json-ld/jupyterhub-context.jsonld
 - aid: jupyterhub:jupyterhub-proxy-api
   name: JupyterHub Proxy API
   description: Configurable HTTP proxy management.
@@ -312,6 +286,30 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/jupyterhub-users-api-openapi.yml
+  - type: Documentation
+    url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  - type: Repository
+    url: https://github.com/jupyterhub/jupyterhub
+  - type: Authentication
+    url: https://jupyterhub.readthedocs.io/en/stable/rbac/index.html
+  - type: JSONSchema
+    url: json-schema/jupyterhub-user.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-server.json
+  - type: JSONSchema
+    url: json-schema/jupyterhub-group.json
+  - type: JSONLDContext
+    url: json-ld/jupyterhub-context.jsonld
+- aid: jupyterhub:jupyterhub-oauth2-api
+  name: JupyterHub O Auth2 API
+  description: OAuth2 authorization endpoints.
+  humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
+  baseURL: http://localhost:8000/hub/api
+  tags:
+  - OAuth2
+  properties:
+  - type: OpenAPI
+    url: openapi/jupyterhub-oauth2-api-openapi.yml
   - type: Documentation
     url: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
   - type: Repository
