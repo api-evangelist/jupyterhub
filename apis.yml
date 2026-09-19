@@ -109,6 +109,8 @@ apis:
   humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
   baseURL: http://localhost:8000/hub/api
   tags:
+  - Authorization
+  tags_raw:
   - Authorizations
   properties:
   - type: OpenAPI
@@ -306,6 +308,8 @@ apis:
   humanURL: https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html
   baseURL: http://localhost:8000/hub/api
   tags:
+  - Authentication
+  tags_raw:
   - OAuth2
   properties:
   - type: OpenAPI
