@@ -1,17 +1,7 @@
 {
   "provider": "jupyterhub",
   "sources": [
-    "jupyterhub-activity-api-openapi.yml",
-    "jupyterhub-admin-api-openapi.yml",
-    "jupyterhub-authorizations-api-openapi.yml",
-    "jupyterhub-general-api-openapi.yml",
-    "jupyterhub-groups-api-openapi.yml",
-    "jupyterhub-oauth2-api-openapi.yml",
-    "jupyterhub-proxy-api-openapi.yml",
-    "jupyterhub-servers-api-openapi.yml",
-    "jupyterhub-services-api-openapi.yml",
-    "jupyterhub-tokens-api-openapi.yml",
-    "jupyterhub-users-api-openapi.yml"
+    "_original/jupyterhub-rest-api-openapi.yml"
   ],
   "outputs": [
     "jupyterhub-activity-api-openapi.yml",
@@ -26,9 +16,28 @@
     "jupyterhub-tokens-api-openapi.yml",
     "jupyterhub-users-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "jupyterhub-rest-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "superseded outputs removed: jupyterhub-o-auth2-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 11 total)"
+  ],
+  "skipped": [
+    "jupyterhub-activity-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jupyterhub-admin-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jupyterhub-authorizations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jupyterhub-general-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jupyterhub-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jupyterhub-o-auth2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jupyterhub-proxy-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jupyterhub-servers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jupyterhub-services-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jupyterhub-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jupyterhub-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
