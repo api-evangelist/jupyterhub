@@ -1,4 +1,4 @@
-# JupyterHub (jupyterhub)
+# JupyterHub
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,74 +66,164 @@
 
 JupyterHub is a multi-user server for Jupyter notebooks. It manages authentication, spawns and proxies multiple instances of the single-user Jupyter notebook server, and exposes a REST API for managing users, groups, services, tokens, and the proxy.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/jupyterhub/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/jupyterhub/refs/heads/main/apis.yml)
+**Areas:** Authentication · Data Science · Education · Hub · Multi-User · Notebooks · Python
 
-## Scope
+## JupyterHub on APIs.io
 
-- **Type:** Index
+Everything profiled for JupyterHub is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/jupyterhub/](https://apis.io/providers/jupyterhub/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (11)
 
-- Authentication
-- Data Science
-- Education
-- Hub
-- Multi-User
-- Notebooks
-- OAuth2
-- Python
+- [JupyterHub Activity API](https://apis.io/apis/jupyterhub/jupyterhub-activity-api/) — User activity reporting.
+- [JupyterHub Admin API](https://apis.io/apis/jupyterhub/jupyterhub-admin-api/) — Administrative operations.
+- [JupyterHub Authorizations API](https://apis.io/apis/jupyterhub/jupyterhub-authorizations-api/) — Token and cookie verification.
+- [JupyterHub General API](https://apis.io/apis/jupyterhub/jupyterhub-general-api/) — Hub identity and information.
+- [JupyterHub Groups API](https://apis.io/apis/jupyterhub/jupyterhub-groups-api/) — User group management.
+- [JupyterHub Proxy API](https://apis.io/apis/jupyterhub/jupyterhub-proxy-api/) — Configurable HTTP proxy management.
+- [JupyterHub Servers API](https://apis.io/apis/jupyterhub/jupyterhub-servers-api/) — Single-user server lifecycle.
+- [JupyterHub Services API](https://apis.io/apis/jupyterhub/jupyterhub-services-api/) — Hub-managed services.
+- [JupyterHub Tokens API](https://apis.io/apis/jupyterhub/jupyterhub-tokens-api/) — API token management for users.
+- [JupyterHub Users API](https://apis.io/apis/jupyterhub/jupyterhub-users-api/) — User account management.
+- [JupyterHub O Auth2 API](https://apis.io/apis/jupyterhub/jupyterhub-oauth2-api/) — OAuth2 authorization endpoints.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-01-01
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### JupyterHub REST API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-REST API for managing users, groups, single-user servers, services, tokens, the proxy, and OAuth2 authorization in a JupyterHub deployment. Authenticated via API tokens or OAuth2.
+- [Jupyterhub Agentic Access](https://apis.io/agentic-access/jupyterhub/jupyterhub-agentic-access/)
 
-- **Human URL:** [https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html](https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html)
-- **Base URL:** `http://localhost:8000/hub/api`
+#### JSON Schema (3)
 
-#### Tags
+The data models the API reads and writes.
 
-- Authentication
-- Groups
-- OAuth2
-- REST API
-- Servers
-- Tokens
-- Users
+- [JupyterHub Group](https://apis.io/schemas/jupyterhub/jupyterhub-group/)
+- [JupyterHub Server](https://apis.io/schemas/jupyterhub/jupyterhub-server/)
+- [JupyterHub User](https://apis.io/schemas/jupyterhub/jupyterhub-user/)
 
-#### Properties
+#### JSON-LD (1)
 
-- [Documentation](https://jupyterhub.readthedocs.io/en/stable/reference/rest-api.html)
-- [Repository](https://github.com/jupyterhub/jupyterhub)
-- [Authentication](https://jupyterhub.readthedocs.io/en/stable/rbac/index.html)
-- [OpenAPI](openapi/jupyterhub-rest-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/jupyterhub-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/jupyterhub-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/jupyterhub-user.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/jupyterhub-server.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/jupyterhub-group.json) — [JSON Schema](https://json-schema.org/specification)
-- [J S O N L D Context](json-ld/jupyterhub-context.jsonld)
+Linked-data contexts for the provider's vocabulary.
 
-## Common Properties
+- [Jupyterhub Context](https://apis.io/jsonld/jupyterhub/jupyterhub-context/)
 
-- [LinkedIn](https://www.linkedin.com/company/project-jupyter)
+#### Collections (12)
+
+Postman and Open Collection request collections.
+
+- [JupyterHub REST Activity API](https://apis.io/collections/jupyterhub/open-jupyterhub-activity-api/)
+- [JupyterHub REST Activity Admin API](https://apis.io/collections/jupyterhub/open-jupyterhub-admin-api/)
+- [JupyterHub REST Activity Authorizations API](https://apis.io/collections/jupyterhub/open-jupyterhub-authorizations-api/)
+- [JupyterHub REST Activity General API](https://apis.io/collections/jupyterhub/open-jupyterhub-general-api/)
+- [JupyterHub REST Activity Groups API](https://apis.io/collections/jupyterhub/open-jupyterhub-groups-api/)
+- [JupyterHub REST Activity OAuth2 API](https://apis.io/collections/jupyterhub/open-jupyterhub-oauth2-api/)
+- [JupyterHub REST Activity Proxy API](https://apis.io/collections/jupyterhub/open-jupyterhub-proxy-api/)
+- [JupyterHub REST API](https://apis.io/collections/jupyterhub/open-jupyterhub-rest-api/)
+- [JupyterHub REST Activity Servers API](https://apis.io/collections/jupyterhub/open-jupyterhub-servers-api/)
+- [JupyterHub REST Activity Services API](https://apis.io/collections/jupyterhub/open-jupyterhub-services-api/)
+- [JupyterHub REST Activity Tokens API](https://apis.io/collections/jupyterhub/open-jupyterhub-tokens-api/)
+- [JupyterHub REST Activity Users API](https://apis.io/collections/jupyterhub/open-jupyterhub-users-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [JupyterHub — jsonschema rules](https://apis.io/rules/jupyterhub/jupyterhub-jsonschema-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Jupyterhub Authentication](https://apis.io/security/jupyterhub/jupyterhub-authentication/)
+- [Jupyterhub Domain Security](https://apis.io/security/jupyterhub/jupyterhub-domain-security/)
+- [Jupyterhub Vulnerability Disclosure](https://apis.io/security/jupyterhub/jupyterhub-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Jupyterhub Scopes](https://apis.io/scopes/jupyterhub/jupyterhub-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Jupyterhub Plans Pricing](https://apis.io/plans/jupyterhub/jupyterhub-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Jupyterhub Rate Limits](https://apis.io/rate-limits/jupyterhub/jupyterhub-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Jupyterhub Finops](https://apis.io/finops/jupyterhub/jupyterhub-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://jupyter.org/hub)
 - [Documentation](https://jupyterhub.readthedocs.io/)
-- [Getting Started](https://jupyterhub.readthedocs.io/en/stable/tutorial/quickstart.html)
-- [Installation](https://jupyterhub.readthedocs.io/en/stable/installation-guide.html)
-- [GitHub Organization](https://github.com/jupyterhub)
-- [Repository](https://github.com/jupyterhub/jupyterhub)
-- [Community](https://discourse.jupyter.org/c/jupyterhub)
-- [License](https://github.com/jupyterhub/jupyterhub/blob/main/COPYING.md)
+- [Getting started](https://jupyterhub.readthedocs.io/en/stable/tutorial/quickstart.html)
+- [Blog](https://blog.jupyter.org/feed)
+- [GitHub](https://github.com/jupyterhub)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
-**URL:** https://apievangelist.com
+**Kin Score 39.1** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 58.8 |
+| Contract governance | 9.8 |
+| Operational transparency | 21.1 |
+| Developer ergonomics | 38.1 |
+| Access clarity | 7.9 |
+
+**Agent readiness 20.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 32.4** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/jupyterhub/](https://apis.io/providers/jupyterhub/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for JupyterHub: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/jupyterhub/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
